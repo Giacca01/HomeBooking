@@ -19,6 +19,9 @@ begin;
     drop table if exists Liste cascade;
     drop table if exists ComposizioneLista cascade;
     drop table if exists Viaggi cascade;
+    drop table if exists Messaggi cascade;
+    drop table if exists RecensioniHost cascade;
+    drop table if exists RecensioniOspiti cascade;
     
     --Tables' creation
     create table Utenti(
@@ -208,6 +211,38 @@ begin;
         constraint Viaggi_PK primary key(CodiceLista, CodiceCitta),
         constraint Viaggi_Liste_SK foreign key(CodiceLista) references Liste(CodiceLista) on update cascade on delete no action,
         constraint Viaggi_Citta_SK foreign key(CodiceCitta) references Citta(CodiceCitta) on update cascade on delete no action
+    );
+
+    create table Messaggi(
+        CodiceMessaggio serial,
+        Risposta integer, -- da gestire con le br
+        Testo varchar(500) not null,
+        DataOra date not null,
+        constraint Messaggi_PK primary key(CodiceMessaggio),
+        constraint Risposta_SK foreign key(Risposta) references Messaggi(Risposta)
+    );
+
+    create table RecensioniHost(
+        CodicePrenotazione integer not null,
+        CodiceMessaggio integer not null,
+        Commento varchar(500) not null,
+
+        constraint CodicePrenotazione_PK primary key(CodicePrenotazione),
+        constraint CodiceMessaggio_SK foreign key(CodiceMessaggio) references Messaggi(CodiceMessaggio)
+    );
+
+    create table RecensioniOspiti(
+        CodicePrenotazione integer not null,
+        CodiceMessaggio integer not null,
+        TestoAlloggio varchar(500) not null,
+        TestoHost varchar(500) not null,
+        PunteggioPulizia integer check(0 > PunteggioPulizia < 6),
+        PunteggioComunicazione integer check(0 > PunteggioComunicazione < 6),
+        PunteggioPosizione integer check(0 > PunteggioPosizione < 6),
+        PunteggioQualità integer check(0 > PunteggioQualità < 6),
+
+        constraint CodicePrenotazione_PK primary key(CodicePrenotazione),
+        constraint CodiceMessaggio_SK foreign key(CodiceMessaggio) references Messaggi(CodiceMessaggio)
     );
     
 commit;
