@@ -4,6 +4,7 @@ begin;
     drop table if exists NumeriTelefono cascade;
     drop table if exists Host cascade;
     drop table if exists Alloggi cascade;
+    drop table if exists TipologiaAlloggi cascade;
     drop table if exists Foto cascade;
     drop table if exists DotazioneServizi cascade;
     drop table if exists Servizi cascade;
@@ -88,6 +89,12 @@ begin;
         unique(Nome, CodiceComune)
     );
     
+    create table TipologiaAlloggi(
+        CodiceTipologia serial,
+        Descrizione varchar(20),
+        constraint CodiceTipologia_PK primary key(CodiceTipologia)
+    );
+
     create table Alloggi(
         CodiceAlloggio serial,
         NumLetti integer not null,
@@ -99,9 +106,11 @@ begin;
         OrarioCheckOut time(4) not null check(OrarioCheckOut > OrarioCheckIn),
         Citta integer not null,
         Proprietario integer not null,
+        Tipologia integer not null,
         constraint Alloggi_PK primary key(CodiceAlloggio),
         constraint Alloggi_Citta_SK foreign key(Citta) references Citta(CodiceCitta) on update cascade on delete no action,
         constraint Alloggi_Host_SK foreign key(Proprietario) references Host(CodiceHost) on update cascade on delete no action,
+        constraint Alloggi_Tipologia_SK foreign key(Tipologia) references TipologiaAlloggi(CodiceTipologia),
         unique(Nome, Via, Civico, Cap, Citta)
     );
     

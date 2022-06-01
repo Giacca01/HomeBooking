@@ -70,12 +70,19 @@ INSERT INTO Citta VALUES (3, 'San Bernardo', 2);
 INSERT INTO Citta VALUES (4, 'San Michele', 2);
 INSERT INTO Citta VALUES (5, 'Motta', 2);
 
+--TipologiaAlloggi
+INSERT INTO TipologiaAlloggi VALUES (1, 'Attico');
+INSERT INTO TipologiaAlloggi VALUES (2, 'Monolocale');
+INSERT INTO TipologiaAlloggi VALUES (3, 'Bilocale');
+INSERT INTO TipologiaAlloggi VALUES (4, 'Più piani');
+INSERT INTO TipologiaAlloggi VALUES (5, 'Stanza singola');
+
 --Alloggi
-INSERT INTO Alloggi VALUES (1, 3, 'Villa Casa', 'Via del porto', '420', 10022, '10:30', '14:30', 3, 1);
-INSERT INTO Alloggi VALUES (2, 2, 'Casa Roberta', 'Vicolo Buio', '3', 10122, '8:30', '18:30', 3, 1);
-INSERT INTO Alloggi VALUES (3, 1, 'Dimora Lussuoso', 'Via Porta', '88', 10422, '9:30', '15:30', 4, 2);
-INSERT INTO Alloggi VALUES (4, 4, 'Villa Rossa', 'Via Nuria', '1', 12423, '11:30', '17:30', 4, 2);
-INSERT INTO Alloggi VALUES (5, 2, 'Casa Bruna', 'Vicolo Uno', '12', 10123, '10:30', '16:30', 1, 2);
+INSERT INTO Alloggi VALUES (1, 3, 'Villa Casa', 'Via del porto', '420', 10022, '10:30', '14:30', 3, 1, 1);
+INSERT INTO Alloggi VALUES (2, 2, 'Casa Roberta', 'Vicolo Buio', '3', 10122, '8:30', '18:30', 3, 1, 2);
+INSERT INTO Alloggi VALUES (3, 1, 'Dimora Lussuoso', 'Via Porta', '88', 10422, '9:30', '15:30', 4, 2, 3);
+INSERT INTO Alloggi VALUES (4, 4, 'Villa Rossa', 'Via Nauria', '1', 12423, '11:30', '17:30', 4, 2, 3);
+INSERT INTO Alloggi VALUES (5, 2, 'Casa Bruna', 'Vicolo Uno', '12', 10123, '10:30', '16:30', 1, 2, 4);
 
 --Foto
 INSERT INTO Foto VALUES (1, '/data/photo1.png', 1);
