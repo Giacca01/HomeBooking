@@ -9,12 +9,12 @@ begin;
     drop table if exists Servizi cascade;
     drop table if exists Citta cascade;
     drop table if exists Comuni cascade;
-    drop table if exists Regione cascade;
+    drop table if exists Regioni cascade;
     drop table if exists Stati cascade;
     drop table if exists MetodiPagamento cascade;
     drop table if exists UtilizzoMetodiPagamento cascade;
     drop table if exists PeriodiDisponibilita cascade;
-    drop table if exists Prenotazioni cascade;
+    drop table if exists Prenotazione cascade;
     drop table if exists ComposizioneUtenti cascade;
     drop table if exists Liste cascade;
     drop table if exists ComposizioneLista cascade;
@@ -44,7 +44,7 @@ begin;
     
     create table Host(
         CodiceHost serial,
-        Badge bool,
+        Badge boolean,
         
         --NumeroSoggiorni integer,
         --TassoCancellazione decimal(5, 2),
@@ -217,17 +217,17 @@ begin;
         CodiceMessaggio serial,
         Risposta integer, -- da gestire con le br
         Testo varchar(500) not null,
-        DataOra date not null,
+        DataOra timestamp not null,
         constraint Messaggi_PK primary key(CodiceMessaggio),
-        constraint Risposta_SK foreign key(Risposta) references Messaggi(Risposta)
+        constraint Risposta_SK foreign key(Risposta) references Messaggi(CodiceMessaggio)
     );
 
     create table RecensioniHost(
         CodicePrenotazione integer not null,
-        CodiceMessaggio integer not null,
+        CodiceMessaggio integer,
         Commento varchar(500) not null,
 
-        constraint CodicePrenotazione_PK primary key(CodicePrenotazione),
+        constraint CodicePrenotazioneHost_PK primary key(CodicePrenotazione),
         constraint CodiceMessaggio_SK foreign key(CodiceMessaggio) references Messaggi(CodiceMessaggio)
     );
 
@@ -236,12 +236,12 @@ begin;
         CodiceMessaggio integer not null,
         TestoAlloggio varchar(500) not null,
         TestoHost varchar(500) not null,
-        PunteggioPulizia integer check(0 > PunteggioPulizia < 6),
-        PunteggioComunicazione integer check(0 > PunteggioComunicazione < 6),
-        PunteggioPosizione integer check(0 > PunteggioPosizione < 6),
-        PunteggioQualità integer check(0 > PunteggioQualità < 6),
+        PunteggioPulizia integer,
+        PunteggioComunicazione integer,
+        PunteggioPosizione integer,
+        PunteggioQualità integer,
 
-        constraint CodicePrenotazione_PK primary key(CodicePrenotazione),
+        constraint CodicePrenotazioneOspiti_PK primary key(CodicePrenotazione),
         constraint CodiceMessaggio_SK foreign key(CodiceMessaggio) references Messaggi(CodiceMessaggio)
     );
     
