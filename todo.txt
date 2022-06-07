@@ -1,0 +1,3 @@
+1) Rivedere BR 
+2) Aggiungere vincoli SQL 
+3) Relazione
