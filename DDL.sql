@@ -26,11 +26,11 @@ begin;
     
     --Tables' creation
     create table Utenti(
-        CodiceUtente SERIAL, --we use 32 bit given the huge number of users the db must store
+        CodiceUtente SERIAL,
         Nome varchar(30) not null,
         Cognome varchar(30) not null,
         Email varchar(30) not null,
-        Password varchar(20) not null, --hash???
+        Password varchar(20) not null,
         CartaIdentita varchar(30) not null, -- file path
         constraint Utenti_PK primary key(CodiceUtente),
         unique(Email)
@@ -38,19 +38,14 @@ begin;
     
     create table NumeriTelefono(
         Proprietario serial,
-        Numero varchar(15) not null, -- long enough?
-        constraint NumeriTelefono_PK primary key(Proprietario, Numero), --basta numero??
+        Numero varchar(15) not null,
+        constraint NumeriTelefono_PK primary key(Proprietario, Numero),
         constraint NumeriTelefono_Utenti_SK foreign key(Proprietario) references Utenti(CodiceUtente) on update cascade on delete no action
     );
     
     create table Host(
         CodiceHost serial,
         Badge boolean,
-        
-        --NumeroSoggiorni integer,
-        --TassoCancellazione decimal(5, 2),
-        --NumeroNotti integer,
-        --ValutazioneMedia decimal(2, 1)
         constraint Host_PK primary key(CodiceHost),
         constraint Host_Utenti_SK foreign key(CodiceHost) references Utenti(CodiceUtente) on update cascade on delete no action
     );
@@ -172,7 +167,6 @@ begin;
         CodicePrenotazione serial,
         DataInizio date not null,
         DataFine date not null check (DataFine > DataInizio),
-        --NumOspiti integer not null,
         CostoTotale decimal(6, 3) not null, -- dall'analisi delle ridondanze abbiamo appurato che serva
         DataPagamento date not null check (DataPagamento < DataInizio),
         CodiceAlloggio integer not null,
