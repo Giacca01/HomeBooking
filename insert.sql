@@ -61,7 +61,7 @@ INSERT INTO Comuni VALUES (17, 'Meppel', 8);
 INSERT INTO Comuni VALUES (18, 'Giannina', 9);
 INSERT INTO Comuni VALUES (19, 'Prevesa', 9);
 INSERT INTO Comuni VALUES (20, 'Danzica', 10);
-INSERT INTO Comuni VALUES (2021, 'Stettino', 10);
+INSERT INTO Comuni VALUES (21, 'Stettino', 10);
 
 --Città
 INSERT INTO Citta VALUES (1, 'Airasca', 1);
@@ -187,5 +187,5 @@ INSERT INTO RecensioniHost VALUES (3, 3, 'Gli affituari sono stati gentile ed or
 
 --RecensioniOspiti
 INSERT INTO RecensioniOspiti VALUES (1, 1, 'Alloggio stretto, sconsigliato.', 'Il proprietario si è mostrato disponibile ma la mancanza di spazio è stata comunque un problema.', 5, 5, 3, 1);
-INSERT INTO RecensioniOspiti VALUES (2, 5, 'Torneremo sicuramente', 'Prorietario simpatico ma un po invadente', 1, 3, 3, 1);
+INSERT INTO RecensioniOspiti VALUES (2, 5, 'Torneremo sicuramente', 'Proprietario simpatico ma un po invadente', 1, 3, 3, 1);
 INSERT INTO RecensioniOspiti VALUES (3, 6, 'Bello e riservato.', 'Proprietario gentile e disponibile.', 5, 1, 5, 5);

@@ -222,7 +222,8 @@ begin;
         Testo varchar(500) not null,
         DataOra timestamp not null,
         constraint Messaggi_PK primary key(CodiceMessaggio),
-        constraint Risposta_SK foreign key(Risposta) references Messaggi(CodiceMessaggio)
+        constraint Risposta_SK foreign key(Risposta) references Messaggi(CodiceMessaggio) on update cascade on delete no action,
+        unique(CodiceMessaggio, Risposta)
     );
 
     create table RecensioniHost(
@@ -231,7 +232,7 @@ begin;
         Commento varchar(500) not null,
 
         constraint CodicePrenotazioneHost_PK primary key(CodicePrenotazione),
-        constraint CodiceMessaggio_SK foreign key(CodiceMessaggio) references Messaggi(CodiceMessaggio)
+        constraint CodiceMessaggio_SK foreign key(CodiceMessaggio) references Messaggi(CodiceMessaggio) on update cascade on delete no action
     );
 
     create table RecensioniOspiti(
@@ -245,7 +246,7 @@ begin;
         PunteggioQualità integer,
 
         constraint CodicePrenotazioneOspiti_PK primary key(CodicePrenotazione),
-        constraint CodiceMessaggio_SK foreign key(CodiceMessaggio) references Messaggi(CodiceMessaggio)
+        constraint CodiceMessaggio_SK foreign key(CodiceMessaggio) references Messaggi(CodiceMessaggio) on update cascade on delete no action
     );
     
 commit;
