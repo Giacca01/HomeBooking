@@ -1,0 +1,76 @@
+1) Lo schema è in bcnf? No, perchè
+2) Abbiamo cascade per imporre la rimozione dei concetti correlati prima di quello
+principale
+3) Gli alloggi possono essere condivisi quindi la prenotazione va identificata anche tramite l’utente che la esegue
+4) Si suppone che un alloggio possa essere di un solo tipo.
+5)  Ci potrebbero essere più alloggi allo stesso indirizzo (ad esempio in un condominio) e ci potrebbero essere alloggi con lo stesso nome e stesso indirizzo in città diverse e quindi occorre identificare l’alloggio in base a nome, indirizzo e città.
+6) Il cap ha senso perché il codice postale c’è in ogni paese.
+7) E’ meglio associare prenotazioni ed ospiti invece che prenotazioni ed utenti per maggior conformità alla realtà: anche gli host possono effettuare prenotazioni, ma in quel caso si stanno comportando come ospiti (da qui la necessità di una generalizzazione non esclusiva).
+8)Il medesimo ragionamento vale per le liste.
+9) Per identificare gli Utenti usiamo un Id autoincrementantee perché altrimenti dovremmo  servirci della mail, che potrebbe essere una stringa lunga e poco efficinete.
+    • Per i Messaggi usiamo un id autoincrementare perché identificare su DataOra potrebbe essere poco efficiente e qualora identificassimo Recensioni esternamente la chiave potrebbe essere troppo lunga
+    • Per ristrutturare la gerarchia Utenti abbiamo deciso di usare la soluzione 3 (associazione tra padre e figlie) perché ci sono operazioni interattive e molto frequenti che necessitano di accedere ai soli dati dell’host e perché inserendo gli attributi di host in utenti avremmo avuto troppi valori null e quindi una pessima occupazione di spazio(considerando l’elevato numero di record dell’associazione). 
+    • Per ristrutturare la gerarchia delle recensioni abbiamo deciso di adottare la soluzione 2 (attributi del padre nelle nelle figlie) perché è quella che garantisce la maggiore occupazione di spazio e cis sono alcune operazioni che accedono oslo ai dati di una entità.
+ 
+     • Per la prenotazione usiamo un Id autoincrementante perché l’identificatore su date potrebbe essere poco efficiente e un identificatore composto risulterebbe troppo complesso
+    • Per gli alloggi conviene identificare su un Id autoincrementante perché usare nome ed indirizzo(oltre a codice della città) sarebbe poco efficiente trattandosi di stringhe lunghe
+    • Per città, regioni e stati conviene usare un id numerico dato che indentificare usando i nomi, che molto probabilmente saranno stringhe lunghe, sarebbe poco efficiente
+    • Per identificare le foto utilizziamo un codice autoincrementante perché identificare sul percorso sarebbe poco efficiente, dato che molto probabilmente questo sarà una stringa lunga.
+
+Anche per i servizi vale lo stesso ragionamento : identificare sulla descrizione sarebbe poco efficiente.
+
+10)     • In MetodiDiPagamento non memorizziamo i dati delle carte di credito, non sarebbe sicuro, verosimilmente la compagnia si affiderà a servizi esterni. Memorizziamo però il tipo di servizio e lo storico dei metodi usati dall’utente(con l’associazione PossessoMetodiPagamento)
+    • Nell’operazione 16 (dettaglio Alloggio) ricostruiamo il calendario dei giorni prenotabili inserendovi tutti i giorni che non ricadono nell’intervallo [DataInizio, DataFine] di prenotazioni relative all’alloggio scelto.
+    • In PeriodiDisponibilità usiamo un identificatore numerico progressivo perché l’identificazione esterna sulle date sarebbe poco efficiente.
+    • In PeriodiDisponibilità memorizziamo i periodi dell’anno in cui l’Host ha deciso di rendere disponibile il suo alloggio
+    • In liste non mettiamo il collegamento a città perché tanto c’è già il collegamento ad Alloggi su Airbnb la lista può essere associata ad un periodo, ma non ad una città (può contenere alloggi di ogni città, ciascuno riferito ad un periodo diverso).
+
+
+ER Principale
+1) MetodiPagamento.DataFine deve essere opzionale
+2) UtilizzoMetodi.DataFine deve essere opzionale
+2) ComposizioneLista.DataFine deve essere opzionale
+3) Alloggi ha come chiave primaria anche la città
+4) Da alloggi bisogna togliere l'attributo servizi
+5) In alloggi manca l'attributo periodi disponibilità (così evitiamo di dover fare cose particolari per l'identificatore)
+6) Host.badge è opzionale
+7) In locazione alloggio mancano le cardinalità
+8) Manca l'entità comuni
+9) In locazione regione e città manca la cardinalità
+10) Viaggi.datainizio e data fine sono opzionali
+11) In prenotazione alloggi mancano gli attributi
+12) La cardinalità di pagamento dal lato metodi è (0, N)
+13) Riferimento prenotazioni recensione lo cambierei in riferimento prenotazioni. La cardinalità dal lato prenotazioni è (0, 2)
+14) Formazione recensioni lo cambierei in commento recensioni
+15) La generalizzazione utenti-host è non totale
+16) Esecuzione prenotazione deve avere due attributi: pagata e "cancellata utente"
+17) PrenotazioniAlloggi deve avere un atrributo "Cancellata host" e "Confermata Host": per questo serve una br che imponga che se cancellata vale false anche confermata vale false
+
+
+TUTTE LE MODIFICHE ALLA CARDINALITÀ VANNO RIPORTATE ANCHE SUL RISTRUTTURATO
+
+Er ristrutturato:
+1) Riferimento Ad utenza lo cambierei con possesso numeri
+2) Liste è duplicato
+3) Formazione recensione va cambiato come detto sopra
+4) RecensionePrenotazioneHost e RecensionePrenotazioneOspiti hanno cardinalità (0, 1) dal lato prenotazioni: è fondamentale, altrimenti l'identificazione non funziona
+5) REGIONI NON va collegato a città, ma a comuni, in sostanza ci serve: città->comuni->regioni
+6) Ricontrollare le cardinalità minime dopo le modifiche fatte al principale
+7) DataFine in dotazione servizi è opzionale
+8) DisponibilitàAlloggi non deve avere nessun attributo
+9) DisponibilitàAlloggi va identificata tramite 
+10) Da host vanno tolti tutti gli attributi tranne badge, perchè sono ridondanti
+11) Telefono in numeri di telefono ha cardinalità (1, 1)
+12) Manca il costo totale in prenotazioni
+13) In generale, controllare la ridondanze
+14) Foto.indirizzo meglio chiamarlo foto.percorso
+15) IN dotazione servizi la data di fine deve essere opzionale
+16) Togliere numero ospiti da prenotazioni
+17) Prenotazioni va collegata a metodi di pagamento per rappresentare i pagamenti
+18) Data fine in composizione lista deve essere opzionale
+
+Schema relazionale: (pliz controllare anche che ci sia tutto nel ddl)
+1) Manca tipologia alloggi
+2) In Alloggi mancano i prezzi+
+3) Mancano le rencesioni
+4) Mancano i messaggi
