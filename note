@@ -27,50 +27,51 @@ Anche per i servizi vale lo stesso ragionamento : identificare sulla descrizione
 
 
 ER Principale
-1) MetodiPagamento.DataFine deve essere opzionale
-2) UtilizzoMetodi.DataFine deve essere opzionale
-2) ComposizioneLista.DataFine deve essere opzionale
-3) Alloggi ha come chiave primaria anche la città
-4) Da alloggi bisogna togliere l'attributo servizi
-5) In alloggi manca l'attributo periodi disponibilità (così evitiamo di dover fare cose particolari per l'identificatore)
-6) Host.badge è opzionale
-7) In locazione alloggio mancano le cardinalità
-8) Manca l'entità comuni
-9) In locazione regione e città manca la cardinalità
-10) Viaggi.datainizio e data fine sono opzionali
-11) In prenotazione alloggi mancano gli attributi
-12) La cardinalità di pagamento dal lato metodi è (0, N)
-13) Riferimento prenotazioni recensione lo cambierei in riferimento prenotazioni. La cardinalità dal lato prenotazioni è (0, 2)
-14) Formazione recensioni lo cambierei in commento recensioni
-15) La generalizzazione utenti-host è non totale
-16) Esecuzione prenotazione deve avere due attributi: pagata e "cancellata utente"
-17) PrenotazioniAlloggi deve avere un atrributo "Cancellata host" e "Confermata Host": per questo serve una br che imponga che se cancellata vale false anche confermata vale false
+1) MetodiPagamento.DataFine deve essere opzionale--
+2) UtilizzoMetodi.DataFine deve essere opzionale--
+2) ComposizioneLista.DataFine deve essere opzionale--
+3) Alloggi ha come chiave primaria anche la città--
+4) Da alloggi bisogna togliere l'attributo servizi--
+5) In alloggi manca l'attributo periodi disponibilità (così evitiamo di dover fare cose particolari per l'identificatore)--
+6) Host.badge è opzionale--
+7) In locazione alloggio mancano le cardinalità--
+8) Manca l'entità comuni--
+9) In locazione regione e città manca la cardinalità--
+10) Viaggi.datainizio e data fine sono opzionali--
+11) In prenotazione alloggi mancano gli attributi ??
+12) La cardinalità di pagamento dal lato metodi è (0, N)--
+13) Riferimento prenotazioni recensione lo cambierei in riferimento prenotazioni. La cardinalità dal lato prenotazioni è (0, 2)--
+14) Formazione recensioni lo cambierei in commento recensioni--
+15) La generalizzazione utenti-host è non totale--
+16) Esecuzione prenotazione deve avere due attributi: pagata e "cancellata utente"--
+17) PrenotazioniAlloggi deve avere un atrributo "Cancellata host" e "Confermata Host": per questo serve una br che imponga che se cancellata vale false anche confermata vale false--
 
 
-TUTTE LE MODIFICHE ALLA CARDINALITÀ VANNO RIPORTATE ANCHE SUL RISTRUTTURATO
+TUTTE LE MODIFICHE ALLA CARDINALITÀ VANNO RIPORTATE ANCHE SUL RISTRUTTURATO--
 
 Er ristrutturato:
-1) Riferimento Ad utenza lo cambierei con possesso numeri
-2) Liste è duplicato
-3) Formazione recensione va cambiato come detto sopra
-4) RecensionePrenotazioneHost e RecensionePrenotazioneOspiti hanno cardinalità (0, 1) dal lato prenotazioni: è fondamentale, altrimenti l'identificazione non funziona
-5) REGIONI NON va collegato a città, ma a comuni, in sostanza ci serve: città->comuni->regioni
-6) Ricontrollare le cardinalità minime dopo le modifiche fatte al principale
-7) DataFine in dotazione servizi è opzionale
-8) DisponibilitàAlloggi non deve avere nessun attributo
-9) DisponibilitàAlloggi va identificata tramite 
-10) Da host vanno tolti tutti gli attributi tranne badge, perchè sono ridondanti
-11) Telefono in numeri di telefono ha cardinalità (1, 1)
-12) Manca il costo totale in prenotazioni
+1) Riferimento Ad utenza lo cambierei con possesso numeri--
+2) Liste è duplicato--
+3) Formazione recensione va cambiato come detto sopra--
+4) RecensionePrenotazioneHost e RecensionePrenotazioneOspiti hanno cardinalità (0, 1) dal lato prenotazioni: è fondamentale, altrimenti l'identificazione non funziona--
+5) REGIONI NON va collegato a città, ma a comuni, in sostanza ci serve: città->comuni->regioni--
+6) Ricontrollare le cardinalità minime dopo le modifiche fatte al principale--
+7) DataFine in dotazione servizi è opzionale--
+8) DisponibilitàAlloggi non deve avere nessun attributo--
+9) DisponibilitàAlloggi va identificata tramite --
+10) Da host vanno tolti tutti gli attributi tranne badge, perchè sono ridondanti--
+11) Telefono in numeri di telefono ha cardinalità (1, 1)--
+12) Manca il costo totale in prenotazioni--
 13) In generale, controllare la ridondanze
-14) Foto.indirizzo meglio chiamarlo foto.percorso
-15) IN dotazione servizi la data di fine deve essere opzionale
-16) Togliere numero ospiti da prenotazioni
-17) Prenotazioni va collegata a metodi di pagamento per rappresentare i pagamenti
-18) Data fine in composizione lista deve essere opzionale
+14) Foto.indirizzo meglio chiamarlo foto.percorso--
+15) IN dotazione servizi la data di fine deve essere opzionale--
+16) Togliere numero ospiti da prenotazioni--
+17) Prenotazioni va collegata a metodi di pagamento per rappresentare i pagamenti--
+18) Data fine in composizione lista deve essere opzionale--
 
 Schema relazionale: (pliz controllare anche che ci sia tutto nel ddl)
-1) Manca tipologia alloggi
-2) In Alloggi mancano i prezzi+
-3) Mancano le rencesioni
-4) Mancano i messaggi
+1) Manca tipologia alloggi--
+2) In Alloggi mancano i prezzi--
+3) Mancano le rencesioni--
+4) Mancano i messaggi--
+

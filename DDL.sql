@@ -102,6 +102,8 @@ begin;
         Citta integer not null,
         Proprietario integer not null,
         Tipologia integer not null,
+        PrezzoPulizie decimal(6, 3) not null,
+        PrezzoNotte decimal(6, 3) not null,
         constraint Alloggi_PK primary key(CodiceAlloggio),
         constraint Alloggi_Citta_SK foreign key(Citta) references Citta(CodiceCitta) on update cascade on delete no action,
         constraint Alloggi_Host_SK foreign key(Proprietario) references Host(CodiceHost) on update cascade on delete no action,
