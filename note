@@ -24,44 +24,56 @@ Anche per i servizi vale lo stesso ragionamento : identificare sulla descrizione
     • In PeriodiDisponibilità usiamo un identificatore numerico progressivo perché l’identificazione esterna sulle date sarebbe poco efficiente.
     • In PeriodiDisponibilità memorizziamo i periodi dell’anno in cui l’Host ha deciso di rendere disponibile il suo alloggio
     • In liste non mettiamo il collegamento a città perché tanto c’è già il collegamento ad Alloggi su Airbnb la lista può essere associata ad un periodo, ma non ad una città (può contenere alloggi di ogni città, ciascuno riferito ad un periodo diverso).
+10) La op 4 accede solo ai dati dell'utente perchè nessuno nasce 
+11) Città, regioni, comuni, stati, servizi, tipologia alloggi metodi pagamento sono modificabili solo da AirBnb, mentre periodi disponibilità è modificabile dall'utnete generico
+12) Lidea è che l'utente scriva il messaggio per rispondere alla recensione o come postilla
+13) L'idea è che l'untente, una volta autenticatosi, abbia accesso ad una lista di prenotazioni a lui associate, in modo da poterle commentare.
+In questo modo può commentare solo quelle di cui è host oppure ospite e non serve memorizzare l'untente che la esegue dentro la prenotazione, perchè è quello che ha fatto la prenotazione (recensione ospite) o il possessore dell'alloggio (recensione host).
+L'utente riferito è ovviamente il possessore dell'alloggio prenotato oppure l'utente che ha fatto la prenotazione
 
 
 ER Principale
-1) MetodiPagamento.DataFine deve essere opzionale
-2) UtilizzoMetodi.DataFine deve essere opzionale
-2) ComposizioneLista.DataFine deve essere opzionale
-3) Alloggi ha come chiave primaria anche la città
-4) Da alloggi bisogna togliere l'attributo servizi
-5) In alloggi manca l'attributo periodi disponibilità (così evitiamo di dover fare cose particolari per l'identificatore)
-6) Host.badge è opzionale
-7) In locazione alloggio mancano le cardinalità
-8) Manca l'entità comuni
-9) In locazione regione e città manca la cardinalità
-10) Viaggi.datainizio e data fine sono opzionali
-11) In prenotazione alloggi mancano gli attributi
-12) La cardinalità di pagamento dal lato metodi è (0, N)
-13) Riferimento prenotazioni recensione lo cambierei in riferimento prenotazioni. La cardinalità dal lato prenotazioni è (0, 2)
-14) Formazione recensioni lo cambierei in commento recensioni
-15) La generalizzazione utenti-host è non totale
-16) Esecuzione prenotazione deve avere due attributi: pagata e "cancellata utente"
-17) PrenotazioniAlloggi deve avere un atrributo "Cancellata host" e "Confermata Host": per questo serve una br che imponga che se cancellata vale false anche confermata vale false
+1) MetodiPagamento.DataFine deve essere opzionale--
+2) UtilizzoMetodi.DataFine deve essere opzionale--
+2) ComposizioneLista.DataFine deve essere opzionale--
+3) Alloggi ha come chiave primaria anche la città--
+4) Da alloggi bisogna togliere l'attributo servizi--
+5) In alloggi manca l'attributo periodi disponibilità (così evitiamo di dover fare cose particolari per l'identificatore)--
+6) Host.badge è opzionale--
+7) In locazione alloggio mancano le cardinalità--
+8) Manca l'entità comuni--
+9) In locazione regione e città manca la cardinalità--
+10) Viaggi.datainizio e data fine sono opzionali--
+11) In prenotazione alloggi mancano gli attributi ??
+12) La cardinalità di pagamento dal lato metodi è (0, N)--
+13) Riferimento prenotazioni recensione lo cambierei in riferimento prenotazioni. La cardinalità dal lato prenotazioni è (0, 2)--
+14) Formazione recensioni lo cambierei in commento recensioni--
+15) La generalizzazione utenti-host è non totale--
+16) Esecuzione prenotazione deve avere due attributi: pagata e "cancellata utente"--
+17) PrenotazioniAlloggi deve avere un atrributo "Cancellata host" e "Confermata Host": per questo serve una br che imponga che se cancellata vale false anche confermata vale false--
 
 
-TUTTE LE MODIFICHE ALLA CARDINALITÀ VANNO RIPORTATE ANCHE SUL RISTRUTTURATO
+18) ProprietarioLIsta va cambiato in CreazioneListe
+19) RInominare AventeTipologia in TipoAlloggi
+20) In dotrazione servizi mancano le date
+21) RecensioniAlloggi va cambiato in RiferimentoAlloggi
+
+
+TUTTE LE MODIFICHE ALLA CARDINALITÀ VANNO RIPORTATE ANCHE SUL RISTRUTTURATO--
 
 Er ristrutturato:
-1) Riferimento Ad utenza lo cambierei con possesso numeri
-2) Liste è duplicato
-3) Formazione recensione va cambiato come detto sopra
-4) RecensionePrenotazioneHost e RecensionePrenotazioneOspiti hanno cardinalità (0, 1) dal lato prenotazioni: è fondamentale, altrimenti l'identificazione non funziona
-5) REGIONI NON va collegato a città, ma a comuni, in sostanza ci serve: città->comuni->regioni
-6) Ricontrollare le cardinalità minime dopo le modifiche fatte al principale
-7) DataFine in dotazione servizi è opzionale
-8) DisponibilitàAlloggi non deve avere nessun attributo
-9) DisponibilitàAlloggi va identificata tramite 
-10) Da host vanno tolti tutti gli attributi tranne badge, perchè sono ridondanti
-11) Telefono in numeri di telefono ha cardinalità (1, 1)
-12) Manca il costo totale in prenotazioni
+1) Riferimento Ad utenza lo cambierei con possesso numeri--
+2) Liste è duplicato--
+3) Formazione recensione va cambiato come detto sopra--
+4) RecensionePrenotazioneHost e RecensionePrenotazioneOspiti hanno cardinalità (0, 1) dal lato prenotazioni: è fondamentale, altrimenti l'identificazione non funziona--
+5) REGIONI NON va collegato a città, ma a comuni, in sostanza ci serve: città->comuni->regioni--
+6) Ricontrollare le cardinalità minime dopo le modifiche fatte al principale--
+7) DataFine in dotazione servizi è opzionale--
+8) DisponibilitàAlloggi non deve avere nessun attributo--
+9) DisponibilitàAlloggi va identificata tramite --
+10) Da host vanno tolti tutti gli attributi tranne badge, perchè sono ridondanti--
+11) Telefono in numeri di telefono ha cardinalità (1, 1)--
+12) Manca il costo totale in prenotazioni--
 13) In generale, controllare la ridondanze
 14) Foto.indirizzo meglio chiamarlo foto.percorso
 15) IN dotazione servizi la data di fine deve essere opzionale
@@ -70,8 +82,14 @@ Er ristrutturato:
 18) Data fine in composizione lista deve essere opzionale
 19) Nei metodi di pagamento mancano le date
 
+
 Schema relazionale: (pliz controllare anche che ci sia tutto nel ddl)
-1) Manca tipologia alloggi
-2) In Alloggi mancano i prezzi+
-3) Mancano le rencesioni
-4) Mancano i messaggi
+1) Manca tipologia alloggi--
+2) In Alloggi mancano i prezzi--
+3) Mancano le rencesioni--
+4) Mancano i messaggi--
+
+
+1) Br ristrutturato: ok
+2) Br originale: ok
+3) Motivaizone ridondanze
