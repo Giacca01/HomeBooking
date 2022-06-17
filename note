@@ -68,6 +68,7 @@ Er ristrutturato:
 16) Togliere numero ospiti da prenotazioni
 17) Prenotazioni va collegata a metodi di pagamento per rappresentare i pagamenti
 18) Data fine in composizione lista deve essere opzionale
+19) Nei metodi di pagamento mancano le date
 
 Schema relazionale: (pliz controllare anche che ci sia tutto nel ddl)
 1) Manca tipologia alloggi
