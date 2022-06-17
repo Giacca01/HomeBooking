@@ -53,9 +53,9 @@ ER Principale
 17) PrenotazioniAlloggi deve avere un atrributo "Cancellata host" e "Confermata Host": per questo serve una br che imponga che se cancellata vale false anche confermata vale false--
 
 
-18) ProprietarioLIsta va cambiato in CreazioneListe
-19) RInominare AventeTipologia in TipoAlloggi
-20) In dotrazione servizi mancano le date
+18) ProprietarioLIsta va cambiato in CreazioneListe--
+19) RInominare AventeTipologia in TipoAlloggi--
+20) In dotrazione servizi mancano le date--
 21) RecensioniAlloggi va cambiato in RiferimentoAlloggi
 
 
